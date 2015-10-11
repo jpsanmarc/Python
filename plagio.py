@@ -6,11 +6,11 @@ import matplotlib.pyplot as plt
 def histoParrafo(parrafo):
     palabras = parrafo.strip().split()
     histograma = {}
-        for palabra in palabras:
-        if palabra not in histograma.keys():
-            histograma[palabra] = palabras.count(palabra)
-            tpl = (palabra, histograma[palabra])
-            global histo01.append(tpl)
+    for palabra in palabras:
+    if palabra not in histograma.keys():
+        histograma[palabra] = palabras.count(palabra)
+        tpl = (palabra, histograma[palabra])
+        global histo01.append(tpl)
     return histograma
 
 #Retorna un conjunto con todas las palabras de ambos parrafos y completa los histogramas con las palabras que no aparecen en los parrafos
@@ -72,23 +72,25 @@ def distCoseno(histograma1,histograma2):
 a = raw_input("Ingrese nombre archivo 1 aqui: ")
 b = raw_input("Ingrese nombre archivo 2 aqui: ")
 archivo1 = open(a)
-nParr1 = 0                                                   ##Permite saber que parrafo se esta revisando del Archivo 1
+nParr1 = 0                               ##Permite saber que parrafo se esta revisando del Archivo 1
 distanciasE = {}
 distanciasC = {}
 conflictos = []
+Euclid = np.array([])
+Coseno = np.array([])
 porcentajes = []
 for parrafo1 in archivo1:
-    if parrafo1 != "\n":                                     ##Comprueba que el parrafo no sea solo un salto de linea
+    if parrafo1 != "\n":               ##Comprueba que el parrafo no sea solo un salto de linea
         nParr1 += 1
         histo1 = histoParrafo(parrafo1)
         archivo2 = open(b)
-        nParr2 = 0                                           ##Permite saber que parrafo se esta revisando del Archivo 1
+        nParr2 = 0                       ##Permite saber que parrafo se esta revisando del Archivo 1
         for parrafo2 in archivo2:
-            if parrafo2 != "\n":                             ##Comprueba que el parrafo no sea solo un salto de linea
+            if parrafo2 != "\n":      ##Comprueba que el parrafo no sea solo un salto de linea
                 nParr2 += 1
                 histo2 = histoParrafo(parrafo2)
-                distE = distEuclidiana(histo1, histo2)       #Distancia Euclidiana entre Parrafo1 y Parrafo2
-                distC = distCoseno(histo1, histo2)           #Distancia Coseno entre Parrafo1 y Parrafo2
+                distE = distEuclidiana(histo1, histo2) #Distancia Euclidiana entre Parrafo1 y Parrafo2
+                distC = distCoseno(histo1, histo2) #Distancia Coseno entre Parrafo1 y Parrafo2
                 distanciasE[(nParr1,nParr2)] = distE
                 distanciasC[(nParr1,nParr2)] = distC
                 porcentaje = 100 - (round(distC,2) * 100)    #Calcula porcentaje de similitud entre ambos parrafos
@@ -102,14 +104,11 @@ for i in conflictos:
     print "Los parrafos", str(parra1), "y", str(parra2), "con un", str(porcen),"% de similitud."
 
 #Grafica
-#tablaC = np.array([[1,2,3],[3,4,5],[5,6,6]])
-#tablaE = np.array([[1,2],[3,4],[5,6]])
-#print tablaC
-plt.hist(porcentajes)
+tablaC = np.array([[1,2,3],[3,4,5],[5,6,6]])
+tablaE = np.array([[1,2],[3,4],[5,6]])
+print tablaC
 plt.title("Frecuencia de porcentajes de similitud entre parrafos")
 plt.grid(True)
-plt.xlabel("Porcentajes")
-plt.ylabel("Frecuencia")
-#plt.plot(tablaC)
+plt.plot(tablaC)
 plt.show()
 
