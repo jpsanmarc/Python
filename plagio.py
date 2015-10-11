@@ -43,6 +43,8 @@ def distEuclidiana(histograma1, histograma2):
 def distCoseno(histograma1,histograma2):
     #Guarda las distancias Euclidianas de ambos histogramas
     distE1,distE2 = distEuclidiana(histograma1,[]),distEuclidiana(histograma2,[])
+    #Obtener conjunto con todas las palabras
+    vocab = vocabulario(histograma1, histograma2)
     
     suma = 0
     for palabra in vocab:
