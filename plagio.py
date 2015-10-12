@@ -7,9 +7,9 @@ def histoParrafo(parrafo):
     #Eliminar Signos de Puntuacion
     for punt in [',','.','#',';','$','%','&','\/','(',')','=','\"','\'']:
         parrafo = parrafo.replace(punt,'')
-    #Convertir a Minuscula
+    #Convertir a Minuscula, eliminar \n y volver una lista el parrafo
     palabras = parrafo.lower().strip().split()
-    #Crear Histograma
+    #Crear Histograma en un diccionario
     histograma = {}
     for palabra in palabras:
         if palabra not in histograma.keys():
