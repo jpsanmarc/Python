@@ -23,16 +23,13 @@ def espejo(matriz):
     
 
 def  escaladeMrgrey (matriz):
-        for pixely in matriz:
-            for pixelx in matriz:
-                red, green, blue = pixelx[pixely][0]
-                gris = (red+green+blue)/3
-                valorRGBnew = [gris, gris, gris]
-                pixely[pixelx] = valorRGBnew
-        salida = nombre+"EDG.png"
-        convertirMatrizAImagen(matriz, salida)
-        os.system(salida)
-
+	for pixely in range(len(matriz)):
+		for pixelx in range(len(matriz[pixely])):
+			red, green, blue = matriz[pixely][pixelx]
+			gris = (red+green+blue)/3
+			valorRGBnew = [gris, gris, gris]
+			matriz[pixely][pixelx] = valorRGBnew
+			os.system(salida)
 
 def rotar(imagenMatriz, rotacion):	#1=90[grado],2=180[grado],3=270[grado]
 	imagenMatriz = numpy.rot90(numpy.array(imagenMatriz),rotacion)
@@ -50,7 +47,7 @@ def negativo(matriz):
     convertirMatrizAImagen(matriz1, salida)
     os.system(salida)
 
-nombre = raw_input("Ingrese el nombre de la imagen: ")
+nombre = raw_input("Ingrese el nombre de la imagen (sin extension) : ")
 tipo = "."+raw_input("Ingrese el tipo de archivo de la imagen: ")
 imagen = nombre+tipo
 archivo = nombre + ".txt"
@@ -82,5 +79,42 @@ while flag:
                 if asd == "n":
                     flag = False
         
-    
+'''
+while True:
+	nombre = raw_input("Ingrese el nombre de la imagen: ")
+	tipo = raw_input("Ingrese el tipo de archivo de la imagen(inclyendo punto): ")
+	imagen = nombre+tipo
+	archivo = nombre + ".txt"
+	convertirImagenAArchivo(imagen, archivo)
+	matriz = leerArchivo(archivo)
+	print 'las acciones posibles son: "pixelado", "escala de gris","espejo", "espejo vertical", "rotar",  "negativo" y "salir"'
+	prompt1 = raw_input(' Que desea hacer con el archivo? (escritas como aparecen mas arriba)')
+	
+	if prompt1 == 'pixelado':
+		size = raw_input('Que tamanio desea que tenga cada pixel resultante?')
+		pixelado(matriz, size)
+		
+	elif prompt1 == 'escala de gris':
+		escaladeMrgrey(matriz)
+		
+	elif prompt1 == 'espejo':
+		espejo(matriz)
+		
+	elif prompt1 == 'espejo vertical':
+		espejovertical(matriz)
+
+	elif prompt1 == 'rotar':
+		rota = raw_input('Por que angulo quiere rotar la imagen? (Puede ser por 90,180, 270, 360)')
+		rota = rota/90
+		rotar(matriz, rota)
+		
+	elif prompt1 == 'negativo':
+		negativo(matriz)
+	elif prompt1 == 'salir':
+		break
+	else:
+		print 'ingrese una opcion valida'
+
+a = raw_input()
+'''
     
