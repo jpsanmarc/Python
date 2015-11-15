@@ -39,13 +39,43 @@ def negativo(matriz):
 			for color in range(3):
 				pix[color] = 255 - pix[color]
 
-nombre = raw_input("Ingrese el nombre de la imagen: ")
-tipo = raw_input("Ingrese el tipo de archivo de la imagen(inclyendo punto): ")
-imagen = nombre+tipo
-archivo = nombre + ".txt"
-convertirImagenAArchivo(imagen, archivo)
-matriz = leerArchivo(archivo)
-espejovertical(matriz)
+
+
+while True:
+	nombre = raw_input("Ingrese el nombre de la imagen: ")
+	tipo = raw_input("Ingrese el tipo de archivo de la imagen(inclyendo punto): ")
+	imagen = nombre+tipo
+	archivo = nombre + ".txt"
+	convertirImagenAArchivo(imagen, archivo)
+	matriz = leerArchivo(archivo)
+	print 'las acciones posibles son: "pixelado", "escala de gris","espejo", "espejo vertical", "rotar",  "negativo" y "salir"'
+	prompt1 = raw_input(' ¿Que desea hacer con el archivo? (escritas como aparecen más arriba)')
+	
+	if prompt1 == 'pixelado':
+		size = raw_input('¿Que tamanio desea que tenga cada pixel resultante?')
+		pixelado(matriz, size)
+		
+	elif prompt1 == 'escala de gris':
+		escaladeMrgrey(matriz)
+		
+	elif prompt1 == 'espejo':
+		espejo(matriz)
+		
+	elif prompt1 == 'espejo vertical':
+		espejovertical(matriz)
+
+	elif prompt1 == 'rotar':
+		rota = raw_input('¿Por que angulo quiere rotar la imagen? (Puede ser por 90,180, 270, 360)')
+		rota = rota/90
+		rotar(matriz, rota)
+		
+	elif prompt1 == 'negativo':
+		negativo(matriz)
+	elif prompt1 == 'salir':
+		break
+	else:
+		print 'ingrese una opcion valida'
+
 a = raw_input()
 
 
