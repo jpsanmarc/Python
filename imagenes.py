@@ -86,6 +86,39 @@ def negativo(arreglo, contador):
     ArrayAImagen(arreglo, salida)
     contador +=1
     return arreglo, contador
+    
+def pixelado(matriz, tamanopxl):
+	tamanopxl = int(tamañopxl)
+	promediopxl = 0
+	if (len(matriz%tamañopxl != 0) and len(matriz[0] != 0):
+		print 'ingrese un tamaño de pixel compatible con su imagen'
+
+	else:
+		for pixely in range(len(matriz))[::tamanopxl]:
+			for pixelx in range(len(matriz[pixely]))[::tamanopxl]:
+				prom = promediocolores(matriz, pixely, pixelx,promediopxl, tamanopxl)
+				aplicarcolor (matriz, promediopxl,tamanopxl)
+	return
+				
+
+def promediocolores (matriz, pixely, pixelx, promediopxl, tamanopxl):
+	for y in range(tamañopxl):
+		red, green, blue = matriz[pixely+y][pixelx]
+		promediopxl += (red+green+blue)/3
+		for x in range(tamañopxl):
+			red, green, blue = matriz[pixely][pixelx+x]
+			promediopxl += (red+green+blue)/3
+	promediopxl = promediopxl/tamanopxl
+	return promediopxl
+
+def aplicarcolor (matriz, promediopxl,tamanopxl):
+	for y in range(tamañopxl):
+		red, green, blue = matriz[pixely+y][pixelx]
+		red, green, blue = promediopxl, promediopxl, promediopxl
+		for x in range(tamañopxl):
+			red, green, blue = matriz[pixely][pixelx+x]
+			red, green, blue = promediopxl, promediopxl, promediopxl
+	return None
 
 nombre = raw_input("Ingrese el nombre de la imagen: ")
 tipo = "."+raw_input("Ingrese el tipo de archivo de la imagen: ")
