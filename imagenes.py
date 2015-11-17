@@ -218,4 +218,5 @@ while flag:
             if confirmacion == "n":
                 flag = False
                 ArrayAImagen(arreglo, nombre+"Final.png")
+                os.remove(archivo)
                 os.system("clear")
