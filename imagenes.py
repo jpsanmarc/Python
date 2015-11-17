@@ -39,6 +39,35 @@ def sepia(arreglo,contador):
     ArrayAImagen(arreglo, salida)
     contador += 1
     return arreglo, contador
+    
+def francia(arreglo, contador):
+            matriztemp = arreglo.tolist()
+            for pixely in range(len(matriztemp)):
+                        for pixelx in range(int(len(matriztemp[pixely])/3)):
+                                red, green, blue = matriztemp[pixely][pixelx]
+                                blue = 255
+                                matriztemp[pixely][pixelx] = [red, green, blue]
+                        for pixelx in range(int(len(matriztemp[pixely])/3),2*int(len(matriztemp[pixely])/3)):
+                                        red, green, blue = matriztemp[pixely][pixelx]
+                                        red = red + 100
+                                        green = green + 100
+                                        blue = blue + 100
+                                        if red > 255:
+                                                red = 255
+                                        if green > 255:
+                                                green = 255
+                                        if blue > 255:
+                                                blue = 255
+                                        matriztemp[pixely][pixelx] = [red, green, blue]
+                        for pixelx in range(2*int(len(matriztemp[pixely])/3),len(matriztemp[pixely])):
+                                        red, green, blue = matriztemp[pixely][pixelx]
+                                        red = 255
+                                        matriztemp[pixely][pixelx] = [red, green, blue]
+            salida = nombre+str(contador)+".png"
+            arreglo = np.array(matriztemp)
+            ArrayAImagen(arreglo, salida)
+            contador += 1
+            return arreglo, contador
 
 def espejovertical(arreglo, contador):
     arreglo = np.array(arreglo)[::-1]
@@ -179,7 +208,8 @@ filtros  = {"espejo":espejo,
             "180":rotar,
             "270":rotar,
             "sepia":sepia,
-            "tonalizar":tonalizar
+            "tonalizar":tonalizar,
+            "francia": francia
             }
 
 comandos = {"espejo":"Aplica efecto espejo.",
@@ -190,7 +220,8 @@ comandos = {"espejo":"Aplica efecto espejo.",
             "180":"Rota la imagen en 180°.",
             "270":"Rota la imagen en 270°.",
             "sepia":"Aplica efecto sepia.",
-            "tonalizar":"Intensifica un color en especifico (Rojo, Azul o Verde)."
+            "tonalizar":"Intensifica un color en especifico (Rojo, Azul o Verde).",
+            "francia": "Ponte a la moda poniendole una genial bandera francesa a tu imagen"
             }
 
 flag = True
