@@ -117,50 +117,16 @@ def negativo(arreglo, contador):
     ArrayAImagen(arreglo, salida)
     contador +=1
     return arreglo, contador
-'''
-def promediarPixeles(pixeles):
-    sumaR, sumaG, sumaB = 0, 0, 0
-    total = len(pixeles)
-    for pix in pixeles:
-        sumaR += pix[0]
-        sumaG += pix[1]
-        sumaB += pix[2]
-    prom = [sumaR/total,sumaG/total,sumaB/total]
-    return prom
 
-
-def pixelado(imagenMatriz,tamanioPixel):
-    lenY = len(imagenMatriz)
-    lenX = len(imagenMatriz[0])
-    print lenX, lenY
-    inicio = [0,0]
-    for i in range(lenX * lenY):
-        pixeles = list()
-        pos = list()
-        for fila in range(tamanioPixel):
-            if inicio[0] + fila == lenY:
-                break
-            for col in range(tamanioPixel):
-                if inicio[1] + col == lenX:
-                    break
-                filaR, colR = inicio[0]+fila,inicio[1]+col
-                #print filaR, colR
-                print lenY, ':', filaR
-                print lenX, ':', colR
-                pixeles.append(imagenMatriz[filaR][colR])
-                pos.append((filaR,colR))
-            inicio[1] += tamanioPixel
-            print inicio[1]
-        inicio[0] += tamanioPixel
-        inicio[1] = 0
-        prom = promediarPixeles(pixeles)
-        for pix in pos:
-            imagenMatriz[pix[0]][pix[1]] = prom
-    return imagenMatriz
-'''
 
 def tonalizar(arreglo, contador):
-    color = raw_input('Ingrese el color al que desea tonalizar (R:Rojo,G:Verde,B:Azul): ')
+    flug = True
+    while flug:
+            color = raw_input('Ingrese el color al que desea tonalizar (R:Rojo,G:Verde,B:Azul): ').lower()
+            if color in ["r", "g", "b"]:
+                    flug = False
+            else:
+                    "Por favor, ingrese un comando valido"
     matriz = arreglo.tolist()
     for pixely in range(len(matriz)):
         for pixelx in range(len(matriz[pixely])):
@@ -172,8 +138,7 @@ def tonalizar(arreglo, contador):
                 matriz[pixely][pixelx][2] = 255
             else:
                 print 'Abortando accion...\nPor favor ingrese solo la letra R, G o B'
-                return False
-    salida = nombre+"Tonalizar.png"
+    salida = nombre+str(contador)+".png"
     arreglo = np.array(matriz)
     ArrayAImagen(arreglo, salida)
     contador += 1
